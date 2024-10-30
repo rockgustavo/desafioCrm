@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: "Banco MySQL Container"
+
+  web:
+    locale-resolver: fixed
+    locale: pt_BR
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3307/pagebox?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
+    username: root
+    password: root
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        "[show_sql]": true
+        "[format_sql]": true
+    hibernate:
+      ddl-auto: none
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:/schema.sql
+      data-locations: classpath:/data.sql
+
+server:
+  port: 8081
