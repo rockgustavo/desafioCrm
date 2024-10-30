@@ -8,9 +8,9 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3307/pagebox?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
-    username: root
-    password: root
+    url: jdbc:mysql://localhost:3307/desafiocrm?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: admin
+    password: adm123
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -21,11 +21,11 @@ spring:
     hibernate:
       ddl-auto: none
 
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:/schema.sql
-      data-locations: classpath:/data.sql
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations: classpath:/schema.sql
+#      data-locations: classpath:/data.sql
 
 server:
   port: 8081

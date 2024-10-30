@@ -8,6 +8,8 @@ public interface CustomerService {
 
     Optional<CustomerDTO> findByEmailAndPassword(String email, String password);
 
+    CustomerDTO findById(Long id);
+
     CustomerDTO createCustomer(CustomerDTO customerDTO);
 
     CustomerDTO updateCustomer(CustomerDTO customerDTO);

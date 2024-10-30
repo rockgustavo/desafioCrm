@@ -2,6 +2,7 @@ package com.rockgustavo.desafiocrm.rest.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,9 +28,12 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.createCustomer(customerDTO));
     }
 
-    @PutMapping
-    public ResponseEntity<CustomerDTO> updateCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
+    @PutMapping("{id}")
+    public ResponseEntity<CustomerDTO> updateCustomer(
+            @Valid @PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
+        customerDTO.setId(customerService.findById(id).getId());
         return ResponseEntity.ok(customerService.updateCustomer(customerDTO));
+
     }
 
     @GetMapping("/login")

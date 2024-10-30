@@ -35,8 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
         for (OrderItemDTO orderItemDTO : orderDTO.getOrderItems()) {
             // Verifica se o item existe no estoque
-            Stock stock = stockRepository
-                    .findByItem_Id(orderItemDTO.getItemId())
+            Stock stock = stockRepository.findByItem_Id(orderItemDTO.getItemId())
                     .orElseThrow(() -> new IllegalArgumentException(
                             "Item com ID " + orderItemDTO.getItemId() + " não encontrado no estoque."));
 
