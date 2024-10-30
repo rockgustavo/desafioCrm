@@ -1,8 +1,11 @@
 package com.rockgustavo.desafiocrm.rest.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.rockgustavo.desafiocrm.model.entity.Customer;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderDTO {
     private Long id;
-    private LocalDate orderDate;
-    private List<OrderItemDTO> orderItems; // Usando um DTO específico para OrderItem
+    private LocalDateTime orderDate;
+    @NotBlank(message = "Este pedido precisa pertencer à um cliente!")
+    private Customer customer;
+    private List<OrderItemDTO> orderItems;
 }

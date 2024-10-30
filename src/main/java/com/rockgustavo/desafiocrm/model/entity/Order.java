@@ -1,6 +1,6 @@
 package com.rockgustavo.desafiocrm.model.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -22,7 +22,7 @@ public class Order {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
