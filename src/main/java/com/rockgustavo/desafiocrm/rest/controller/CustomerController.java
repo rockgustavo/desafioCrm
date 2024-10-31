@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rockgustavo.desafiocrm.exception.CustomerNotFoundException;
 import com.rockgustavo.desafiocrm.model.entity.Customer;
 import com.rockgustavo.desafiocrm.rest.dto.CustomerDTO;
 import com.rockgustavo.desafiocrm.service.CustomerService;
@@ -38,6 +39,6 @@ public class CustomerController {
     public ResponseEntity<CustomerDTO> login(@RequestParam String email, @RequestParam String password) {
         return customerService.findByEmailAndPassword(email, password)
                 .map(ResponseEntity::ok)
-                .orElseThrow(() -> new RuntimeException("Usuário ou senha inválidos."));
+                .orElseThrow(() -> new CustomerNotFoundException("Usuário ou senha inválidos."));
     }
 }

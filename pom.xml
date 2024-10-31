@@ -47,6 +47,11 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- Spring JDBC para JdbcTemplate e ScriptUtils -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
 		<!-- MySql-->
 		<dependency>
 			<groupId>mysql</groupId>
