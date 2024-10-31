@@ -7,6 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.rockgustavo.desafiocrm.exception.InsufficientStockException;
+import com.rockgustavo.desafiocrm.exception.OrderNotFoundException;
+import com.rockgustavo.desafiocrm.model.entity.Customer;
 import com.rockgustavo.desafiocrm.model.entity.Order;
 import com.rockgustavo.desafiocrm.model.entity.OrderItem;
 import com.rockgustavo.desafiocrm.model.entity.Stock;
@@ -28,8 +30,11 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderDTO createOrder(OrderDTO orderDTO) {
         Order order = Order.builder()
+                .customer(Customer
+                        .builder()
+                        .id(orderDTO.getCustomer().getId())
+                        .build())
                 .orderDate(LocalDateTime.now())
-                .customer(orderDTO.getCustomer())
                 .orderItems(new ArrayList<>())
                 .build();
 
@@ -61,9 +66,10 @@ public class OrderServiceImpl implements OrderService {
         return modelMapper.map(orderRepository.save(order), OrderDTO.class);
     }
 
-    @SuppressWarnings("deprecation")
     public OrderDTO getOrder(Long numeroPedido) {
-        return modelMapper.map(orderRepository.getById(numeroPedido), OrderDTO.class);
+        Order order = orderRepository.findById(numeroPedido)
+                .orElseThrow(() -> new OrderNotFoundException("Pedido com ID: " + numeroPedido + " não encontrado."));
+        return modelMapper.map(order, OrderDTO.class);
     }
 
     public void deleteOrder(Long orderId) {

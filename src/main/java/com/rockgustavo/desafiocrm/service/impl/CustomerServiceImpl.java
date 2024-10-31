@@ -2,7 +2,9 @@ package com.rockgustavo.desafiocrm.service.impl;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.rockgustavo.desafiocrm.exception.CustomerNotFoundException;
@@ -20,10 +22,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public Optional<CustomerDTO> findByEmailAndPassword(String email, String password) {
         Optional<Customer> customerOpt = customerRepository.findByEmail(email);
-        if (customerOpt.isPresent()) { // && passwordEncoder.matches(password, customerOpt.get().getPassword())) {
+        if (customerOpt.isPresent() && passwordEncoder.matches(password, customerOpt.get().getPassword())) {
             return Optional.of(modelMapper.map(customerOpt.get(), CustomerDTO.class));
         }
         return Optional.empty();
@@ -35,29 +38,26 @@ public class CustomerServiceImpl implements CustomerService {
         return modelMapper.map(customer, CustomerDTO.class);
     }
 
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-        Customer customer = Customer.builder()
-                .name(customerDTO.getName())
-                .email(customerDTO.getEmail())
-                .password(validatePassword(customerDTO.getPassword()))
-                .build();
-        return modelMapper.map(customerRepository.save(customer), CustomerDTO.class);
+    public CustomerDTO createCustomer(Customer customer) {
+        return modelMapper.map(customerRepository.save(validateCustomer(customer)), CustomerDTO.class);
     }
 
     @Transactional
-    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        Customer customer = Customer.builder()
-                .name(customerDTO.getName())
-                .email(customerDTO.getEmail())
-                .password(validatePassword(customerDTO.getPassword()))
-                .build();
-        return modelMapper.map(customerRepository.save(customer), CustomerDTO.class);
+    public CustomerDTO updateCustomer(Customer customer) {
+        return modelMapper.map(customerRepository.save(validateCustomer(customer)), CustomerDTO.class);
     }
 
     private String validatePassword(String password) {
-        return password;
-        // return (!StringUtils.isEmpty(password)) ? passwordEncoder.encode(password) :
-        // password;
+        return (!StringUtils.isEmpty(password)) ? passwordEncoder.encode(password) : password;
+    }
+
+    private Customer validateCustomer(Customer customer) {
+        return Customer.builder()
+                .id(customer.getId())
+                .name(customer.getName())
+                .email(customer.getEmail())
+                .password(validatePassword(customer.getPassword()))
+                .build();
     }
 
 }

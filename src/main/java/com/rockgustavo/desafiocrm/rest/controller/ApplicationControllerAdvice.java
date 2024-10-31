@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.rockgustavo.desafiocrm.exception.CustomerNotFoundException;
 import com.rockgustavo.desafiocrm.exception.InsufficientStockException;
+import com.rockgustavo.desafiocrm.exception.OrderNotFoundException;
 import com.rockgustavo.desafiocrm.rest.ApiErrors;
 
 @RestControllerAdvice
@@ -19,6 +20,12 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiErrors handleCustomerNotFoundException(CustomerNotFoundException ex) {
+        return new ApiErrors(ex.getMessage());
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handleCustomerNotFoundException(OrderNotFoundException ex) {
         return new ApiErrors(ex.getMessage());
     }
 

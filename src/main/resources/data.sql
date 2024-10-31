@@ -1,6 +1,6 @@
 INSERT INTO customer (name, email, password) VALUES 
 ('Maria Silva', 'maria.silva@email.com', 'senha123'),
-('João Souza', 'joao.souza@email.com', 'senha456');
+('Joao Souza', 'joao.souza@email.com', 'senha456');
 
 INSERT INTO item (name, price) VALUES
 ('Item A', 10.99),

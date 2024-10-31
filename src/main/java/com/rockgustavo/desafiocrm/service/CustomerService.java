@@ -2,6 +2,7 @@ package com.rockgustavo.desafiocrm.service;
 
 import java.util.Optional;
 
+import com.rockgustavo.desafiocrm.model.entity.Customer;
 import com.rockgustavo.desafiocrm.rest.dto.CustomerDTO;
 
 public interface CustomerService {
@@ -10,7 +11,7 @@ public interface CustomerService {
 
     CustomerDTO findById(Long id);
 
-    CustomerDTO createCustomer(CustomerDTO customerDTO);
+    CustomerDTO createCustomer(Customer customer);
 
-    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+    CustomerDTO updateCustomer(Customer customer);
 }
