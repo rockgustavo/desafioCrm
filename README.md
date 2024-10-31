@@ -89,13 +89,13 @@ Na raiz do projeto tem o arquivo **'Desafio CRM.postman_collection.json'** que a
 #### Parar os Containeres:
 
 ```
-docker stop frontend backend mysql
+docker stop backend mysql-container
 ```
 
 #### Remover os Containeres:
 
 ```
-docker rm frontend backend mysql
+docker rm backend mysql-container
 ```
 
 ### 7. Limpando Volumes
