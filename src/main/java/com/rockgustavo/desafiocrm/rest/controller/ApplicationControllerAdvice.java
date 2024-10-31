@@ -17,27 +17,31 @@ import com.rockgustavo.desafiocrm.rest.ApiErrors;
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
 
+    // codigo 404
     @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiErrors handleCustomerNotFoundException(CustomerNotFoundException ex) {
+    public ApiErrors handleCustomerNotFound(CustomerNotFoundException ex) {
         return new ApiErrors(ex.getMessage());
     }
 
+    // codigo 404
     @ExceptionHandler(OrderNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiErrors handleCustomerNotFoundException(OrderNotFoundException ex) {
+    public ApiErrors handleOrderNotFound(OrderNotFoundException ex) {
         return new ApiErrors(ex.getMessage());
     }
 
+    // codigo 400
     @ExceptionHandler(InsufficientStockException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleInsufficientStockException(InsufficientStockException ex) {
+    public ApiErrors handleInsufficientStock(InsufficientStockException ex) {
         return new ApiErrors(ex.getMessage());
     }
 
+    // codigo 400
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ApiErrors handleValidationExceptions(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult().getAllErrors()
                 .stream()
                 .map(error -> error.getDefaultMessage())
@@ -45,12 +49,14 @@ public class ApplicationControllerAdvice {
         return new ApiErrors(errors);
     }
 
+    // codigo 400
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleIllegalArgumentException(IllegalArgumentException ex) {
+    public ApiErrors handleIllegalArgument(IllegalArgumentException ex) {
         return new ApiErrors(ex.getMessage());
     }
 
+    // codigo 500
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiErrors handleGenericException(Exception ex) {

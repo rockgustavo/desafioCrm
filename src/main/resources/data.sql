@@ -1,6 +1,6 @@
 INSERT INTO customer (name, email, password) VALUES 
-('Maria Silva', 'maria.silva@email.com', 'senha123'),
-('Joao Souza', 'joao.souza@email.com', 'senha456');
+('Maria Silva', 'maria.silva@email.com', '$2a$12$wFFYmBkKfE6r8YQt.eocdeAS7qSdr5yTA3FWHF2WWC8qBcO8uEkBi'),
+('Joao Souza', 'joao.souza@email.com', '$2a$12$b4pt7n2qW7op2LqVrocHXO6C2SXmD2S/t38Ohu571B/.o5CBrwZZi');
 
 INSERT INTO item (name, price) VALUES
 ('Item A', 10.99),

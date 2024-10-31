@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "1c4d88ea-6eb0-4985-8728-b92721ae356b",
+		"name": "Desafio CRM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29623530"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjo5Zjc2NWU0NC1jY2Y4LTRjMjktYjg0ZC0xMjVhNTNlZjY2ZWU=",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/api/customer/login?email=maria.silva@email.com&password=senha123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"customer",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "maria.silva@email.com"
+								},
+								{
+									"key": "password",
+									"value": "senha123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Cliente/ User",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "123",
+								"username": "user"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user_teste\",\r\n    \"email\": \"teste2@email.com\",\r\n    \"password\": \"senha123\"\r\n}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cliente/ User",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "senha123",
+								"username": "maria.silva@email.com"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Maria Silva\",\r\n    \"email\": \"maria.silva@email.com\",\r\n    \"password\": \"senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/customer"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Pesquisar Pedido",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "senha123",
+								"username": "maria.silva@email.com"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/order?numeroPedido=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"order"
+							],
+							"query": [
+								{
+									"key": "numeroPedido",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Pedido",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "senha123",
+								"username": "maria.silva@email.com"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"id\": 1\r\n    },\r\n    \"orderItems\": [\r\n        {\r\n            \"itemId\": 1,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"itemId\": 2,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/order"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Pedido",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "123",
+								"username": "user"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8081/api/order/2"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

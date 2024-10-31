@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   mysql:
     image: mysql:8
@@ -14,19 +14,26 @@ services:
       - app-network
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -u root -proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     image: rockgustavo/desafiocrm:1.0
+    container_name: desafiocrm_backend
     ports:
       - "8081:8081"
     networks:
       - app-network
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/pagebox?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/desafiocrm?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: adm123
 
 networks:
   app-network:

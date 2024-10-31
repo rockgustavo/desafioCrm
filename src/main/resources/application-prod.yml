@@ -8,10 +8,7 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    #   para executar através de um container docker:
-    url: jdbc:mysql://mysql-container:3306/desafiocrm?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    #   para executar localmente:
-    #  url: jdbc:mysql://localhost:3307/desafiocrm?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/desafiocrm?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: admin
     password: adm123
 
